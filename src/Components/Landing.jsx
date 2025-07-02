@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { Card, CardContent } from "../Components/ui/card";
 import { Button } from "../Components/ui/button";
-import { Sun, Moon } from "lucide-react";
 import { createSharedState, useSharedState } from "overwatch-ts";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
@@ -15,12 +15,18 @@ import bgDark from "@/assets/bgDark.png"
 import bgLight from "@/assets/bgLight.png"
 import overwatchAvatar from "@/assets/overwatchAvatar.png"
 import Image from 'next/image';
-import { Copy } from "lucide-react";
+import { Sun, Moon, Copy,  Menu, X } from "lucide-react";
 createSharedState("theme", "dark");
 export default function OverwatchLanding() {
     const [theme, setTheme] = useSharedState("theme");
     const [particlesInit, setParticlesInit] = useState(false);
     const [copied, setCopied] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const links = [
+    { href: "https://docs.overwatchts.in/", label: "Docs" },
+    { href: "https://github.com/WisdomBits/overwatch", label: "GitHub" },
+    { href: "/blog", label: "Blog" },
+  ];
 
     const handleCopy = () => {
         navigator.clipboard.writeText("npm install overwatch-ts");
@@ -52,7 +58,7 @@ export default function OverwatchLanding() {
                 priority
                 className="h-10 w-auto"
             />
-            <header className="z-10 w-full px-6 py-4 flex justify-between items-center">
+            <header className="md:relative fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 md:px-8 py-3">
                 <div className="text-2xl font-bold flex items-center justify-center">
                     <Image
                         src={theme == "dark" ? darkLogo : lightLogo}
@@ -60,14 +66,44 @@ export default function OverwatchLanding() {
                         priority
                         className="h-auto w-[55px]"
                     /> Overwatch</div>
-                <div className="space-x-4">
-                    <a href="https://docs.overwatchts.in/" target="_blank" className="hover:underline">Docs</a>
-                    <a href="https://github.com/WisdomBits/overwatch" target="_blank" className="hover:underline">GitHub</a>
-                    <a href="/blog" className="hover:underline">Blog</a>
-                </div>
+                <nav className="hidden md:flex items-center space-x-4">
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="hover:text-primary transition-colors"
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+      
+      {/* Mobile Hamburger */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden p-2 rounded hover:bg-white/10 transition-colors"
+      >
+        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      </button>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className={`absolute top-full right-4 mt-2 ${theme === 'dark' ? '#000000' : '#ffffff'} backdrop-blur rounded-lg p-4 flex flex-col space-y-2 md:hidden`}>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm hover:text-primary transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
             </header>
 
-            <section className="z-10 flex flex-col md:flex-row items-center justify-around w-[100%] gap-8 px-6">
+            <section className="md:mt-0 mt-[6rem] z-10 flex flex-col md:flex-row items-center justify-around w-[100%] gap-8 px-6">
                 <Image
                     src={overwatchAvatar}
                     alt="overwatch eagle"
