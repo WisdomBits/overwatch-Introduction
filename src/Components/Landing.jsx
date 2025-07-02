@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useMemo, useState } from "react";
-import { Card, CardContent } from "../components/ui/card";
+import { Card, CardContent } from "../Components/ui/card";
 import { Button } from "../Components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { createSharedState, useSharedState } from "overwatch-ts";
