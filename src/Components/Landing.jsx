@@ -16,7 +16,7 @@ import bgLight from "@/assets/bgLight.png"
 import overwatchAvatar from "@/assets/overwatchAvatar.png"
 import Image from 'next/image';
 import { Copy } from "lucide-react";
-createSharedState("theme", "light");
+createSharedState("theme", "dark");
 export default function OverwatchLanding() {
     const [theme, setTheme] = useSharedState("theme");
     const [particlesInit, setParticlesInit] = useState(false);
