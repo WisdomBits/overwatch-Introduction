@@ -15,14 +15,12 @@ import bgDark from "@/assets/bgDark.png"
 import bgLight from "@/assets/bgLight.png"
 import overwatchAvatar from "@/assets/overwatchAvatar.png"
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { Copy } from "lucide-react";
 createSharedState("theme", "light");
 export default function OverwatchLanding() {
     const [theme, setTheme] = useSharedState("theme");
     const [particlesInit, setParticlesInit] = useState(false);
     const [copied, setCopied] = useState(false);
-      const router = useRouter();
 
     const handleCopy = () => {
         navigator.clipboard.writeText("npm install overwatch-ts");
@@ -63,7 +61,7 @@ export default function OverwatchLanding() {
                         className="h-auto w-[55px]"
                     /> Overwatch</div>
                 <div className="space-x-4">
-                    <a href="https://overwatchts.in/docs" target="_blank" className="hover:underline">Docs</a>
+                    <a href="https://docs.overwatchts.in/" target="_blank" className="hover:underline">Docs</a>
                     <a href="https://github.com/WisdomBits/overwatch" target="_blank" className="hover:underline">GitHub</a>
                     <a href="/blog" className="hover:underline">Blog</a>
                 </div>
@@ -86,7 +84,7 @@ export default function OverwatchLanding() {
                             </button>
                         </div>
                         <Button
-                            onClick={() => router.forward("/docs")}
+                            onClick={() => window.open("https://docs.overwatchts.in/docs", '_blank')}
                             className="mt-4 w-full text-base"
                         >
                             Getting Started
