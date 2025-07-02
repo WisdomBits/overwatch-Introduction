@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
+.card-container {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox, Safari 18.2+, Chromium 121+ */
+
+}
+.card-container::-webkit-scrollbar { 
+    display: none;  /* Older Safari and Chromium */
+}
