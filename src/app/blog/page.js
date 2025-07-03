@@ -6,7 +6,7 @@ const Blog = () => {
     <div className="bg-white min-h-screen">
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-extrabold text-indigo-600 tracking-tight">
+          <div className="text-2xl font-extrabold text-neutral-700 tracking-tight">
             <Link href="/" className="hover:text-gray-900 transition">
                 Overwatch TS
             </Link>
@@ -43,7 +43,7 @@ const Blog = () => {
                 <div className="mt-4 flex gap-6 text-sm font-medium">
                   <a
                     href={post.mediumUrl}
-                    className="text-indigo-600 hover:underline"
+                    className="text-gray-700 hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -51,7 +51,7 @@ const Blog = () => {
                   </a>
                   <a
                     href={post.devtoUrl}
-                    className="text-indigo-600 hover:underline"
+                    className="text-gray-700 hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
