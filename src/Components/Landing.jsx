@@ -26,7 +26,7 @@ export default function OverwatchLanding() {
   ];
 
     const handleCopy = () => {
-        // navigator.clipboard.writeText("npm install overwatch-ts");
+        navigator.clipboard.writeText("npm install overwatch-ts");
         setCopied(true);
         setTimeout(() => setCopied(false), 1500);
     };
@@ -85,7 +85,7 @@ export default function OverwatchLanding() {
                 <Image
                     src={overwatchAvatar}
                     alt="overwatch eagle"
-                    className="absolute w-auto md:bottom-0.5 bottom-3"
+                    className="absolute w-auto bottom-0.5 md:max-w-[800px]"
                     priority
                 />
                 <Card className="max-w-sm w-full backdrop-blur-sm bg-white/30 dark:bg-black/20 border border-white/20 shadow-lg p-4">
