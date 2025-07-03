@@ -1,11 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import { posts } from "../../helpers/blog"
-
 const Blog = () => {
   return (
     <div className="bg-white min-h-screen">
-      {/* Header with soft shadow */}
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-2xl font-extrabold text-indigo-600 tracking-tight">

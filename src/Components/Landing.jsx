@@ -1,25 +1,22 @@
 'use client'
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from 'next/image';
 import { Card, CardContent } from "../Components/ui/card";
 import { Button } from "../Components/ui/button";
-import { createSharedState, useSharedState } from "overwatch-ts";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
+import { useSharedState } from "overwatch-ts";
 import { particleConfigDark } from "@/particlesjs-config";
 import { particleConfigLight } from "@/particlesjs-config-light";
 import { motion, AnimatePresence } from 'framer-motion';
 import darkLogo from "@/assets/dark-overwatch-logo.png"
 import lightLogo from "@/assets/light-overwatch-logo.png"
-import bgDark from "@/assets/bgDark.png"
-import bgLight from "@/assets/bgLight.png"
 import overwatchAvatar from "@/assets/overwatchAvatar.png"
-import Image from 'next/image';
 import { Sun, Moon, Copy,  Menu, X } from "lucide-react";
-createSharedState("theme", "dark");
+import Footer from "./Footer";
+import Background from "./Background";
+import BgImage from "./BgImage";
 export default function OverwatchLanding() {
     const [theme, setTheme] = useSharedState("theme");
-    const [particlesInit, setParticlesInit] = useState(false);
     const [copied, setCopied] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const links = [
@@ -29,35 +26,16 @@ export default function OverwatchLanding() {
   ];
 
     const handleCopy = () => {
-        navigator.clipboard.writeText("npm install overwatch-ts");
+        // navigator.clipboard.writeText("npm install overwatch-ts");
         setCopied(true);
         setTimeout(() => setCopied(false), 1500);
     };
-
-    const particlesLoaded = (container) => {
-        console.log("Particles Loaded:", container);
-    }
-
-    useEffect(() => {
-        initParticlesEngine(async (engine) => {
-            await loadSlim(engine);
-        }).then(() => {
-            setParticlesInit(true);
-            console.log("Particles engine initialized");
-        });
-    }, [])
 
     const options = useMemo(() => (theme === 'dark' ? particleConfigDark : particleConfigLight), [theme]);
 
     return (<>
         <main className={`relative w-full h-screen flex flex-col items-center justify-between ${theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-black text-gray-100' : 'bg-gradient-to-br from-white to-[#ff7d00] text-white-900'}`}>
-            <Image
-                src={theme == "dark" ? bgDark : bgLight}
-                alt="Bg"
-                style={{ width: "100%", height: "100%", opacity: 0.3, position: "absolute" }}
-                priority
-                className="h-10 w-auto"
-            />
+            <BgImage theme={theme} />
             <header className="md:relative fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 md:px-8 py-3">
                 <div className="text-2xl font-bold flex items-center justify-center">
                     <Image
@@ -170,16 +148,8 @@ function ThemeSwitcher() {
                     </CardContent>
                 </Card>
             </section>
-
-            <footer className="z-10 mt-6 mb-6 text-sm text-muted-foreground">© 2025 Overwatch Ts. All rights reserved.</footer>
+            <Footer />
         </main >
-        {particlesInit && (
-            <Particles
-                id="tsparticles"
-                options={options}
-                particlesLoaded={particlesLoaded}
-            />
-        )
-        }
+    <Background options={options} />
     </>);
 }
